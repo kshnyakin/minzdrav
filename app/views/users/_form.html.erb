@@ -1,0 +1,131 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if has_role?(:admin) %>
+  <% else %>
+    <div class="field">
+      Пользователь: <%= @user.surname %> <%= @user.name %> <%= @user.patrynomic %><br>
+      Должность: <%= @user.position.name %><br>
+      Логин: <%= @user.login%><br>
+      Дата приема <%= @user.empl_date%><br>
+    </div>
+  
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.text_field :password %>
+  </div>
+
+  <div class="field">
+    <%= form.label :surname %>
+    <%= form.text_field :surname, :disabled => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, :disabled => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :patrynomic %>
+    <%= form.text_field :patrynomic, :disabled => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Должность: " %>
+    <%= @user.position.name %>
+  </div>
+
+  <div class="field" style="display: none;">
+    <%= form.label :position_id %>
+    <%= form.collection_select :position_id, Position.all, :id, :name, {:disabled => true} %>
+  </div>
+
+  <div class="field">
+    <%= form.label :empl_date %>
+    <%= form.datetime_select :empl_date, :disabled => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :login %>
+    <%= form.text_field :login, :disabled => true %>
+  </div>
+
+  <p>Роли пользователя:</p>
+  <% @roles.each do |role| %>
+    <div>
+      <%= check_box_tag "post[role_ids][]", role.id, @user.roles.include?(role), :disabled => true %>
+      <%= role.name %>
+    </div>
+  <% end %>
+<% end %>
+<% if has_role?(:admin) %>
+
+  <div class="field">
+    <%= form.label :surname %>
+    <%= form.text_field :surname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :patrynomic %>
+    <%= form.text_field :patrynomic %>
+  </div>
+
+  <div class="field">
+    <%= form.label :position_id %>
+    <%= form.collection_select :position_id, Position.all, :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :empl_date %>
+    <%= form.datetime_select :empl_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :login %>
+    <%= form.text_field :login %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.text_field :password %>
+  </div>
+
+  <p>Роли пользователя:</p>
+  <% @roles.each do |role| %>
+    <div>
+      <%= check_box_tag "post[role_ids][]", role.id, @user.roles.include?(role) %>
+      <%= role.name %>
+    </div>
+  <% end %>
+<% end %>
+  <hr>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Surname:</strong>
+  <%= @user.surname %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Patrynomic:</strong>
+  <%= @user.patrynomic %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @user.position.name %>
+</p>
+
+<p>
+  <strong>Empl date:</strong>
+  <%= @user.empl_date %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @user.phone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= mail_to @user.email, @user.email %>
+</p>
+
+<% if has_role?(:admin) %>
+
+  <p>
+    <strong>Login:</strong>
+    <%= @user.login %>
+  </p>
+
+<!--
+  <p>
+    <strong>Password:</strong>
+    <%= @user.password %>
+  </p>
+-->
+
+  <p><strong>Роли пользователя:</strong><br>
+  <ul>
+  <% if @roles %>
+    <% @roles.each do |role| %>
+      <li>
+        <%= role.name %><br>
+      </li>
+    <% end %>
+  <% end %>
+  </ul>
+  </p>
+  
+  <hr>
+  <%= link_to 'Редактировать', edit_user_path(@user) %> |
+<% else %>
+  <hr>
+<% end  %>
+<%= link_to 'Назад', users_path %>

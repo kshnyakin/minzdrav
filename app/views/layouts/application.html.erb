@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <% if user_signed_in? %>
+        <span>Здравствуйте, <%= current_user.email %><br></span>
+        <span>
+          <%= link_to 'Редактировать профиль', edit_user_path(current_user) %> | 
+          <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+        </span>
+    <% else %>
+        <%= link_to 'Войти', new_user_session_path %>
+    <% end %>
+    <hr>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <title>Minzdrav</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

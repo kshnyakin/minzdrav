@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  surname: MyString
+  name: MyString
+  patrynomic: MyString
+  position: one
+  empl_date: 2020-07-12 22:58:40
+  phone: MyString
+  email: MyString
+  login: MyString
+  password: MyString
+
+two:
+  surname: MyString
+  name: MyString
+  patrynomic: MyString
+  position: two
+  empl_date: 2020-07-12 22:58:40
+  phone: MyString
+  email: MyString
+  login: MyString
+  password: MyString
